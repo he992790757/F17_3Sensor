@@ -10,6 +10,7 @@
 #include "config.h"
 #include "DrvUSB.h"			
 #include "V6MDebug.h"
+#include "led.h"
 //const uint8_t LOGO[]={0xF9,0x03,0x47,0x52};										
 //const uint8_t SAVE[]={0x3F};								
 //const uint8_t TOP_W_data[]={0x16,0x05,0x57};				
@@ -121,6 +122,22 @@ void UART_INT_HANDLE(uint32_t u32IntStatus)
 			   System.SignOutCount = (buffer[0x0D]<<8)|buffer[0x0E];
 			   System.Signtotal    = (buffer[0x0F]<<8)|buffer[0x10];	
 		    }
+		else if( System.Uart.CmdFlag == 0xA5)
+			{
+				if(buffer[2]   == 0xA2)
+				{
+					System.testfile = 1; 
+					switch(buffer[4])
+					{
+						case 0 :Light_Init();TOP_W = 0; break ;  //白光 
+						case 1 :Light_Init();TOP_IR940=0; break ;   //红外
+						case 2 :Light_Init();BOT_IR=0; break ;  //透红外
+						case 3 :Light_Init(); 	LEFT_UV=0;	RIGHT_UV=0;	 break ; 
+						case 0xFF : System.testfile = 2 ;  break ;  //紫外	  	
+						default :break ;
+					}
+				}
+			}
 		else 												// 正常情况 发送 返回
 			{											   	//DSP其他的指令
 			//	System.Uart.Lightflag 	= buffer[2] ; 	
@@ -183,6 +200,120 @@ void UART_INT_HANDLE(uint32_t u32IntStatus)
 //	 DSP_SEND(3, &TOP_W_data[0]); 
 //	 OSTimeDly(50);
 //}
+uint8_t  SendSence( PH_SENCE *p)
+{
+	System.Uart.CmdFlag = 0x00 ;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xAA;		
+	while(UART0->FSR.TX_FULL == 1);
+	UART0->DATA = 0x23;
+	while(UART0->FSR.TX_FULL == 1);	   
+	UART0->DATA = 0xA5;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xA0;	
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).length;	
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).sence;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).senceMode;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ISO;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).TG;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).WB1;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).WB2;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).sharpness;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).brightness;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).saturation;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).contrast;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).compress;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).phScale;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).phSize;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).fwdNum; 
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0x47;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0x48;	
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xAA;	
+	Countflag = 0 ; 
+	while(System.Uart.CmdFlag != 0xA5)
+		{
+			OSTimeDly(1),
+			Countflag++; 
+			if(Countflag > DSP_UART_TIME_OUT) 
+			//	return 1 ;  
+			{	Countflag = 0 ; 
+				System.Error = SYS_CON_TIME_OUT ; 
+				GR_DBG_PRINTF("\nthe EEROR inrrupt Flag: 0x%x  \n\n ",comm );
+				return 1 ; 
+			}	
+		} 
+			return 0 ; 			
+}
+
+
+uint8_t  SendMode(PH_MODE *p)
+{
+	System.Uart.CmdFlag = 0x00 ;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xAA;		
+	while(UART0->FSR.TX_FULL == 1);
+	UART0->DATA = 0x23;
+	while(UART0->FSR.TX_FULL == 1);	   
+	UART0->DATA = 0xA5;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xA1;	
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).length;	
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).sence;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).phTotal;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum1;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum2;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum3;
+	while(UART0->FSR.TX_FULL == 1);		   			           
+	UART0->DATA = (*p).ScNum4;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum5;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum6;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum7;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = (*p).ScNum8;
+	while(UART0->FSR.TX_FULL == 1);		   
+	UART0->DATA = 0xAA;	
+	Countflag = 0 ; 
+	while(System.Uart.CmdFlag != 0xA5)
+		{
+			OSTimeDly(1),
+			Countflag++; 
+			if(Countflag > DSP_UART_TIME_OUT) 
+			//	return 1 ;  
+			{	Countflag = 0 ; 
+				System.Error = SYS_CON_TIME_OUT ; 
+				GR_DBG_PRINTF("\nthe EEROR inrrupt Flag: 0x%x  \n\n ",comm );
+				return 1 ; 
+			}		
+		} 
+			return 0 ; 
+}
 
 unsigned char  SHOW_SCREEN_T_W(uint8_t comm, uint8_t time, const uint8_t *DSP_DATA)
 {

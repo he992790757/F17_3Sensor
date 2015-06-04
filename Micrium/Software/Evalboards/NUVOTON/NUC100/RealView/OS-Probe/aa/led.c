@@ -48,15 +48,15 @@ void Top_W_On(void)
 
 		Scen_Send(G_SENCE_WT,0x00);
 
-		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_WT].Sharpness) ; 		    //锐度
-        OSTimeDly(1); 		
-		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_WT].Saturation) ;			//饱和度
-		OSTimeDly(1); 
-        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_WT].Brightness) ; 		//亮度
-        OSTimeDly(1); 
-
-		Scen_Send(0xE5, G_SENCE_WT); 
-		OSTimeDly(5); 		
+//		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_WT].Sharpness) ; 		    //锐度
+//        OSTimeDly(1); 		
+//		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_WT].Saturation) ;			//饱和度
+//		OSTimeDly(1); 
+//        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_WT].Brightness) ; 		//亮度
+//        OSTimeDly(1); 
+//
+//		Scen_Send(0xE5, G_SENCE_WT); 
+//		OSTimeDly(5); 		
 		System.Led.Statu = TOP_WHITE_ON ; 	
 		ADC_Checking(ADC_CK_VLT_T_W,ADC_RSD_T_W );
 	}

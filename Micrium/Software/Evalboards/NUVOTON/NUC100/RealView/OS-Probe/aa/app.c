@@ -205,8 +205,8 @@ OS_STK Task1_Stack[STACK1SIZE];
 OS_STK Task2_Stack[STACK2SIZE];
 #define  Task2_Prio       20
 
-OS_STK Task3_Stack[STACK3SIZE];
-#define  Task3_Prio       19
+//OS_STK Task3_Stack[STACK3SIZE];
+//#define  Task3_Prio       19
 
 #endif
 

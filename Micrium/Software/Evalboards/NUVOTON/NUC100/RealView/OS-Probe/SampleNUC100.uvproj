@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>F16</TargetName>
+      <TargetName>F17</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -473,6 +473,11 @@
               <FileName>dspperf.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\aa\dspperf.c</FilePath>
+            </File>
+            <File>
+              <FileName>Fuc_ph.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\aa\Fuc_ph.c</FilePath>
             </File>
           </Files>
         </Group>

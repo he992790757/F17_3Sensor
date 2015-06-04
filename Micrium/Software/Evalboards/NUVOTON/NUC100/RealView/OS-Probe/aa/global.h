@@ -433,6 +433,7 @@ typedef struct
 	uint16_t   Signtotal ;     // ÕÕÆ¬×ÜÊı 
 	uint8_t	   Local_SignOutCount_Flag;  
 	uint8_t  XyZoom[3]	;
+	uint8_t  testfile; 		//0--¿ÕÏĞ  1 --Ã¦ 2-- ½áÊø; 
 }SYSTEM ; 
 
 APP_EXT SYSTEM System; 

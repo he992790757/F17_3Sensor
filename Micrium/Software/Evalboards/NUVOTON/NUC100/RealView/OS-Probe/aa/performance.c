@@ -265,7 +265,7 @@ void Photo_SignAndChk()
 void  ShowLeftBtmNum()
 { 
 //	Select_Send_LONG(0x77) ;
-	
+	OSTimeDly(10);
 	SHOW_SCREEN_WC_NUM(0xE2, L"×Ü:",System.SignOutCount,L"  ±¾´Î:----",Local_SignOutCount);	
 }
 /*==================================================================
@@ -1259,102 +1259,107 @@ void PhotographFour()
 		}
 
 	 	System.SignOutCount++ ; 
+
 		Light_Init();
 	   	TOP_W = 0;
-//		Scen_Send(G_SENCE_WT,0x00);
-		System.Led.Statu = TOP_WHITE_ON ; 	
-				
+		System.Led.Statu = TOP_WHITE_ON ; 					
 		Select_Send(0x74);			//´´½¨ÐÂ·Ö×é	
-		Scen_Send(0xE5, G_SENCE_WT); 
-        OSTimeDly(5); 
 
-//	 	Scen_Send(0xE7, G_SENCE_WT); 	
-		Dsp_Send_Data(0xE7, G_SENCE_WT,DeepCompression, D_NON,D_NON); 
-	 //	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
-	 //	OSTimeDly(200);
-/*----------------------------------------------------*/	// 
-//	Top_IR940_On();
-
-		Light_Init();
-		TOP_IR940=0;
-		Scen_Send(G_SENCE_T_IR940,0x02);
-		System.Led.Statu= TOP_IR940_ON ; 
-
-		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_T_IR940].Sharpness) ; 		    //Èñ¶È
-        OSTimeDly(1);
-		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_T_IR940].Saturation) ;			//±¥ºÍ¶È
-		OSTimeDly(1); 		 
-        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_T_IR940].Brightness) ; 		//ÁÁ¶È
-        OSTimeDly(1); 
- //       Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_T_IR940].Contrast) ; 		    //¶Ô±È¶È
- //       OSTimeDly(5); 
-		Scen_Send(0xE5, G_SENCE_T_IR940); 
-		OSTimeDly(5); 
-	//	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
-	//    Scen_Send(0xE7, G_SENCE_T_IR940); 	
-		Dsp_Send_Data(0xE7, G_SENCE_T_IR940,DeepCompression, D_NON,D_NON); 
-	//	OSTimeDly(50); 
-
-/*----------------------------------------------------*/	 //µ×ºìÍâ									 							
-	//	Bot_IR_On(); 
-		Light_Init();
-		BOT_IR=0;		
-		Scen_Send(G_SENCE_B_IR,0x02); 
-
-//		System.Led.Statu = BOT_IR_ON ; 
+//		Scen_Send(0xE5, G_SENCE_WT); 
+//        OSTimeDly(5); 
 //
-//		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_B_IR].Sharpness) ; 		    //Èñ¶È
-//        OSTimeDly(5); 
-// //       Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_B_IR].Contrast) ; 		    //¶Ô±È¶È
+////	 	Scen_Send(0xE7, G_SENCE_WT); 	
+//		Dsp_Send_Data(0xE7, G_SENCE_WT,DeepCompression, D_NON,D_NON); 
+//	 //	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
+//	 //	OSTimeDly(200);
+///*----------------------------------------------------*/	// 
+////	Top_IR940_On();
+//
+//		Light_Init();
+//		TOP_IR940=0;
+//		Scen_Send(G_SENCE_T_IR940,0x02);
+//		System.Led.Statu= TOP_IR940_ON ; 
+//
+//		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_T_IR940].Sharpness) ; 		    //Èñ¶È
+//        OSTimeDly(1);
+//		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_T_IR940].Saturation) ;			//±¥ºÍ¶È
+//		OSTimeDly(1); 		 
+//        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_T_IR940].Brightness) ; 		//ÁÁ¶È
+//        OSTimeDly(1); 
+// //       Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_T_IR940].Contrast) ; 		    //¶Ô±È¶È
 // //       OSTimeDly(5); 
-//        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_B_IR].Brightness) ; 		//ÁÁ¶È
-//        OSTimeDly(5); 
-//		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_B_IR].Saturation) ;			//±¥ºÍ¶È
+//		Scen_Send(0xE5, G_SENCE_T_IR940); 
 //		OSTimeDly(5); 
-//		Scen_Send(0xE5, G_SENCE_B_IR); 
-//		OSTimeDly(5);
-//	    Scen_Send(0xE7, G_SENCE_B_IR); 
-
-		OSTimeDly(10); 		
-		Dsp_Send_Data(0x21,0x00,0x01,DeepCompression,D_NON);												
-	// 	OSTimeDly(50);
-/*----------------------------------------------------*/ 	//×Ï¹â
-	 //	Double_UV_On(); 
-	//	Scen_Send(0xe5,PH_SENCE_TOP_UV_70);	
-	  	Light_Init();
-		LEFT_UV=0;
-	//	OSTimeDly(100);
-		RIGHT_UV=0;
-		Scen_Send(G_SENCE_DB_UV,0x00);	
-		OSTimeDly(1);
-		System.Led.Statu = DB_UV_ON ; 
-
- 		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_DB_UV].Sharpness) ; 		    //Èñ¶È
-        OSTimeDly(1); 
-  //      Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_DB_UV].Contrast) ; 		    //¶Ô±È¶È
-  //      OSTimeDly(5); 
-        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_DB_UV].Brightness) ; 		//ÁÁ¶È
-        OSTimeDly(1); 
-		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_DB_UV].Saturation) ;			//±¥ºÍ¶È
-		OSTimeDly(1); 
-		Scen_Send(0xE5, G_SENCE_DB_UV); 
-		OSTimeDly(1);
-
-		Scen_Send(0x50,0x25) ; 
-//		Dsp_Send_Data(0xFF,G_SENCE_DB_UV,0xA0,0x70,D_NON);					
-//		Scen_Send(0xD8,0xF1) ; 								
-//		OSTimeDly(10);	
-
-	//	Scen_Send(0xE7, G_SENCE_DB_UV); 	
-		Dsp_Send_Data(0xE7, G_SENCE_DB_UV,DeepCompression, D_NON,D_NON); 
-	 //	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
-	//	OSTimeDly(40);
-		Scen_Send(0x50,0x01 ) ;	
-//		Scen_Send(0xD8,0x80) ; 			 
-//		Dsp_Send_Data(0xFF,0x01,0x80,0x80,0x80);	
-		Select_Send(0xE9);   
-/*----------------------------------------------------*/	       
-		CheckMode();  
+//	//	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
+//	//    Scen_Send(0xE7, G_SENCE_T_IR940); 	
+//		Dsp_Send_Data(0xE7, G_SENCE_T_IR940,DeepCompression, D_NON,D_NON); 
+//	//	OSTimeDly(50); 
+//
+///*----------------------------------------------------*/	 //µ×ºìÍâ									 							
+//	//	Bot_IR_On(); 
+//		Light_Init();
+//		BOT_IR=0;		
+//		Scen_Send(G_SENCE_B_IR,0x02); 
+//
+////		System.Led.Statu = BOT_IR_ON ; 
+////
+////		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_B_IR].Sharpness) ; 		    //Èñ¶È
+////        OSTimeDly(5); 
+//// //       Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_B_IR].Contrast) ; 		    //¶Ô±È¶È
+//// //       OSTimeDly(5); 
+////        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_B_IR].Brightness) ; 		//ÁÁ¶È
+////        OSTimeDly(5); 
+////		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_B_IR].Saturation) ;			//±¥ºÍ¶È
+////		OSTimeDly(5); 
+////		Scen_Send(0xE5, G_SENCE_B_IR); 
+////		OSTimeDly(5);
+////	    Scen_Send(0xE7, G_SENCE_B_IR); 
+//
+//		OSTimeDly(10); 		
+//		Dsp_Send_Data(0x21,0x00,0x01,DeepCompression,D_NON);												
+//	// 	OSTimeDly(50);
+///*----------------------------------------------------*/ 	//×Ï¹â
+//	 //	Double_UV_On(); 
+//	//	Scen_Send(0xe5,PH_SENCE_TOP_UV_70);	
+//	  	Light_Init();
+//		LEFT_UV=0;
+//	//	OSTimeDly(100);
+//		RIGHT_UV=0;
+//		Scen_Send(G_SENCE_DB_UV,0x00);	
+//		OSTimeDly(1);
+//		System.Led.Statu = DB_UV_ON ; 
+//
+// 		Scen_Send(0xD7,System.Dsp.photo.Scene[G_SENCE_DB_UV].Sharpness) ; 		    //Èñ¶È
+//        OSTimeDly(1); 
+//  //      Scen_Send(0xDA,System.Dsp.photo.Scene[G_SENCE_DB_UV].Contrast) ; 		    //¶Ô±È¶È
+//  //      OSTimeDly(5); 
+//        Scen_Send(0xD9,System.Dsp.photo.Scene[G_SENCE_DB_UV].Brightness) ; 		//ÁÁ¶È
+//        OSTimeDly(1); 
+//		Scen_Send(0xD8,System.Dsp.photo.Scene[G_SENCE_DB_UV].Saturation) ;			//±¥ºÍ¶È
+//		OSTimeDly(1); 
+//		Scen_Send(0xE5, G_SENCE_DB_UV); 
+//		OSTimeDly(1);
+//
+//		Scen_Send(0x50,0x25) ; 
+////		Dsp_Send_Data(0xFF,G_SENCE_DB_UV,0xA0,0x70,D_NON);					
+////		Scen_Send(0xD8,0xF1) ; 								
+////		OSTimeDly(10);	
+//
+//	//	Scen_Send(0xE7, G_SENCE_DB_UV); 	
+//		Dsp_Send_Data(0xE7, G_SENCE_DB_UV,DeepCompression, D_NON,D_NON); 
+//	 //	Dsp_Send_Data(0x21,0x00,0x01,0x01,D_NON);
+//	//	OSTimeDly(40);
+//		Scen_Send(0x50,0x01 ) ;	
+////		Scen_Send(0xD8,0x80) ; 			 
+////		Dsp_Send_Data(0xFF,0x01,0x80,0x80,0x80);	
+//		Select_Send(0xE9);   
+///*----------------------------------------------------*/	 
+ 	Dsp_Send_Data(0xA5,0xA2,0x04,0x01,D_NON);
+	while(System.testfile != 2) OSTimeDly(1);  
+	System.testfile = 0 ; 
+	Select_Send(0xE9);   
+ 	OSTimeDly(10);	    	  
+	CheckMode();  
 	}
 }
 
@@ -1662,171 +1667,97 @@ void PriorExposure()
 
 	if(System.Dsp.Mode == CHECK_MODE)
 	{	
-			uint8_t i = 0 ; 	
-			CheckMode(); 
-
-
-			//Êý¾Ý³õÊ¼»¯
-			for(i=0;i<30;i++)
-			{
-				System.Dsp.photo.photo[i] = 0x00000000  ; 
-			}
-			//Ä¬ÈÏ°×¹â²ÎÊý
+			uint8_t i = 0 ; 
 			
-			System.Dsp.photo.Scene[G_SENCE_WT].FB1   = 0x08;
-			System.Dsp.photo.Scene[G_SENCE_WT].FB2   = 0x08	; 
-			System.Dsp.photo.Scene[G_SENCE_WT].FC1   = 0x16	;
-			System.Dsp.photo.Scene[G_SENCE_WT].FC2   = 0x16	; 
-			System.Dsp.photo.Scene[G_SENCE_WT].WB1   = 0xA6 ;
-			System.Dsp.photo.Scene[G_SENCE_WT].WB2   = 0x7E ; 				
-            System.Dsp.photo.Scene[G_SENCE_WT].Sharpness = 0x80 ; 
-			//System.Dsp.photo.Scene[G_SENCE_WT].Contrast	 = 0x00 ; 	
-			System.Dsp.photo.Scene[G_SENCE_WT].Saturation = 0x6a;
-			System.Dsp.photo.Scene[G_SENCE_WT].Brightness = 0x80 ;  
+			SendSence(&ph_sence[0]);  OSTimeDly(300);	
+			SendSence(&ph_sence[1])	; OSTimeDly(300);
+			SendSence(&ph_sence[2])	; OSTimeDly(300);
+			SendSence(&ph_sence[3])	; OSTimeDly(300);
+			SendMode(&ph_mode[0]) ;   OSTimeDly(300);			
+				
+//			CheckMode(); 
 
-			
-            
-			
-			//940²ÎÊý
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].FB1   = 0x10;
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].FB2   = 0x10	; 
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].FC1   = 0x30	;
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].FC2   = 0x30	; 
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].WB1   = 0x48 ;
-			System.Dsp.photo.Scene[G_SENCE_T_IR940].WB2   = 0xC0 ; 				
-            System.Dsp.photo.Scene[G_SENCE_T_IR940].Sharpness = 0x90; 
-
-			
-			//×ó°×¹â²ÎÊý
-			System.Dsp.photo.Scene[G_SENCE_L_W].FB1   = 0x09;
-			System.Dsp.photo.Scene[G_SENCE_L_W].FB2   = 0x09	; 
-			System.Dsp.photo.Scene[G_SENCE_L_W].FC1   = 0x30	;
-			System.Dsp.photo.Scene[G_SENCE_L_W].FC2   = 0x30	; 		
-			//×óºìÍâ²ÎÊý
-			System.Dsp.photo.Scene[G_SENCE_L_IR].FB1   = 0x09;
-			System.Dsp.photo.Scene[G_SENCE_L_IR].FB2   = 0x09	; 
-			System.Dsp.photo.Scene[G_SENCE_L_IR].FC1   = 0x30	;
-			System.Dsp.photo.Scene[G_SENCE_L_IR].FC2   = 0x30	; 		
-			//Í¸ºìÍâ²Îý
-
-			//uV²ÎÊý
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].FB1   = 0x30;
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].FB2   = 0x30	; 
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].FC1   = 0x32	;
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].FC2   = 0x32	; 
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].WB1   = 0xA0 ;
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].WB2   = 0x70 ; 				
-            System.Dsp.photo.Scene[G_SENCE_DB_UV].Sharpness = 0xB1; 
-			//System.Dsp.photo.Scene[G_SENCE_DB_UV].Contrast	 = 0x00 ; 	
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].Saturation = 0xA0;
-			System.Dsp.photo.Scene[G_SENCE_DB_UV].Brightness = 0x70 ; 
-			//
-			Select_Send(0x96);			//´´½¨ÐÂ·Ö×é
-			OSTimeDly(300);
-/////////////////////////////////////////////////////////////°×¹â
-
-			System.Dsp.photo.Flag = 	G_SENCE_WT ; 
-			ArguPriorExposure()   ;
-/////////////////////////////////////////////////////////////×ó°×¹â
- 			System.Dsp.photo.Flag = 	G_SENCE_L_W	  ;
-			ArguPriorExposure()   ;
-
-/////////////////////////////////////////////////////////////×óºìÍâ
- 			System.Dsp.photo.Flag = 	G_SENCE_L_IR	  ;
-			ArguPriorExposure()   ;
-/////////////////////////////////////////////////////////////940
-			System.Dsp.photo.Flag = 	G_SENCE_T_IR940	  ;
-			ArguPriorExposure()   ;
-///////////////////////////////////////////////////////////////Í¸850
-			System.Dsp.photo.Flag = 	G_SENCE_B_IR	  ;
-			ArguPriorExposure()   ;
-/////////////////////////////////////////////////////////////UV
-			System.Dsp.photo.Flag = 	G_SENCE_DB_UV	  ;
-			ArguPriorExposure()   ;
-			OSTimeDly(200); 
-
-//			//ÖØ·¢ £¬µÚÒ»´Î¿ÉÄÜÆØ¹â
-//			DSP_SEND(4, &TW_Snr1EV_FB[0]);
-//      		OSTimeDly(10); 
-//			DSP_SEND(4, &TW_Snr1EV_FC[0]);
-//			OSTimeDly(10); 
-//			Scen_Send(0xD8,0x80) ;
-//			OSTimeDly(10); 
-//			Dsp_Send_Data(0xFF,G_SENCE_WT,0xAF,0x78,D_NON);
-////			Scen_Send(0xD8,0x00) ;
-////			Dsp_Send_Data(0xFF,G_SENCE_WT,0x00,0x00,D_NON);	
-//				
-//				
-//			OSTimeDly(20); 
-
-//			Scen_Send(G_SENCE_WT,0x01 ) ; 
-//			OSTimeDly(300);	
-//		//	OSTimeDly(300);
-//			Scen_Send(0xE6, G_SENCE_WT); 
-//			OSTimeDly(300);
-//			Scen_Send(0xD8,0x00) ;
-///////////////////////////////////////////////////////
-////			Scen_Send(0xE6, PH_SENCE_R_IR850); 
-////			OSTimeDly(300);
-//			Left_IR850_On();
-//			DSP_SEND(4, &L_IR_Snr1EV_FB[0]);
-//      		OSTimeDly(10); 
-//			DSP_SEND(4, &L_IR_Snr1EV_FC[0]);
-//			OSTimeDly(10); 
-//			Scen_Send(G_SENCE_L_IR,0x01 ) ; 
-//			OSTimeDly(300);	
-//		//	OSTimeDly(300);
-//			Scen_Send(0xE6, G_SENCE_L_IR); 
-//			OSTimeDly(300);
-/////////////////////////////////////////////////////////////////
-//			Top_IR940_On();
-//			OSTimeDly(100); 
 //
-//			Dsp_Send_Data(0xFF,G_SENCE_T_IR940,0x50,0xD1,D_NON);
-//
-//////			DSP_SEND(4, &IR940_Snr1EV_FB[0]);
-//////      		OSTimeDly(10); 
-//////			DSP_SEND(4, &IR940_Snr1EV_FC[0]);
-//////			OSTimeDly(100); 
-//////			Scen_Send(G_SENCE_T_IR940,0x03 ) ; 
-//			OSTimeDly(300);	
-//		//	OSTimeDly(300);
-//			Scen_Send(0xE6, G_SENCE_T_IR940); 
-//			OSTimeDly(300);
-
-/*----------------------------------------------------*/ //×Ï¹â
-//		 	Double_UV_On();
-//			OSTimeDly(300);		
-//			Select_Send(0x96);			 
-//			OSTimeDly(10);
-//			Scen_Send(0xE6, G_SENCE_DB_UV); 														
-//			OSTimeDly(600);		
-//		 	Double_UV_On();
-// 
-//			Scen_Send(0x50,0x25 ) ; 
-//			OSTimeDly(10); 
-//			Scen_Send(0xD8,0xF1) ; 	
-//		    Dsp_Send_Data(0xFF,G_SENCE_DB_UV,0xA0,0x70,D_NON);
-//			//OSTimeDly(10); 
-//
-//			DSP_SEND(4, &UV_Snr1EV_FB[0]);
-//      		OSTimeDly(10); 
-//			DSP_SEND(4, &UV_Snr1EV_FC[0]);
-//			OSTimeDly(10); 
-//			Scen_Send(G_SENCE_DB_UV,0x01 ) ; 
-//			OSTimeDly(300);		
+//			//Êý¾Ý³õÊ¼»¯
+//			for(i=0;i<30;i++)
+//			{
+//				System.Dsp.photo.photo[i] = 0x00000000  ; 
+//			}
+//			//Ä¬ÈÏ°×¹â²ÎÊý
 //			
-//			Select_Send(0x96);			 
-//			OSTimeDly(10);
-//			Scen_Send(0xE6, G_SENCE_DB_UV); 														
-//			OSTimeDly(600);	
+//			System.Dsp.photo.Scene[G_SENCE_WT].FB1   = 0x08;
+//			System.Dsp.photo.Scene[G_SENCE_WT].FB2   = 0x08	; 
+//			System.Dsp.photo.Scene[G_SENCE_WT].FC1   = 0x16	;
+//			System.Dsp.photo.Scene[G_SENCE_WT].FC2   = 0x16	; 
+//			System.Dsp.photo.Scene[G_SENCE_WT].WB1   = 0xA6 ;
+//			System.Dsp.photo.Scene[G_SENCE_WT].WB2   = 0x7E ; 				
+//            System.Dsp.photo.Scene[G_SENCE_WT].Sharpness = 0x80 ; 
+//			//System.Dsp.photo.Scene[G_SENCE_WT].Contrast	 = 0x00 ; 	
+//			System.Dsp.photo.Scene[G_SENCE_WT].Saturation = 0x6a;
+//			System.Dsp.photo.Scene[G_SENCE_WT].Brightness = 0x80 ;  
 //
-//			Scen_Send(0x50,0x01) ;
-//			Scen_Send(0xD8,0x80) ; 	 	
-////			Dsp_Send_Data(0xFF,0x01,0x80,0x80,0x80);
-//			OSTimeDly(10); 
+//			
+//            
+//			
+//			//940²ÎÊý
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].FB1   = 0x10;
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].FB2   = 0x10	; 
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].FC1   = 0x30	;
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].FC2   = 0x30	; 
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].WB1   = 0x48 ;
+//			System.Dsp.photo.Scene[G_SENCE_T_IR940].WB2   = 0xC0 ; 				
+//            System.Dsp.photo.Scene[G_SENCE_T_IR940].Sharpness = 0x90; 
+//
+//			
+//			//×ó°×¹â²ÎÊý
+//			System.Dsp.photo.Scene[G_SENCE_L_W].FB1   = 0x09;
+//			System.Dsp.photo.Scene[G_SENCE_L_W].FB2   = 0x09	; 
+//			System.Dsp.photo.Scene[G_SENCE_L_W].FC1   = 0x30	;
+//			System.Dsp.photo.Scene[G_SENCE_L_W].FC2   = 0x30	; 		
+//			//×óºìÍâ²ÎÊý
+//			System.Dsp.photo.Scene[G_SENCE_L_IR].FB1   = 0x09;
+//			System.Dsp.photo.Scene[G_SENCE_L_IR].FB2   = 0x09	; 
+//			System.Dsp.photo.Scene[G_SENCE_L_IR].FC1   = 0x30	;
+//			System.Dsp.photo.Scene[G_SENCE_L_IR].FC2   = 0x30	; 		
+//			//Í¸ºìÍâ²Îý
+//
+//			//uV²ÎÊý
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].FB1   = 0x30;
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].FB2   = 0x30	; 
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].FC1   = 0x32	;
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].FC2   = 0x32	; 
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].WB1   = 0xA0 ;
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].WB2   = 0x70 ; 				
+//            System.Dsp.photo.Scene[G_SENCE_DB_UV].Sharpness = 0xB1; 
+//			//System.Dsp.photo.Scene[G_SENCE_DB_UV].Contrast	 = 0x00 ; 	
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].Saturation = 0xA0;
+//			System.Dsp.photo.Scene[G_SENCE_DB_UV].Brightness = 0x70 ; 
+//			//
+//			Select_Send(0x96);			//´´½¨ÐÂ·Ö×é
+//			OSTimeDly(300);
+///////////////////////////////////////////////////////////////°×¹â
+//
+//			System.Dsp.photo.Flag = 	G_SENCE_WT ; 
+//			ArguPriorExposure()   ;
+///////////////////////////////////////////////////////////////×ó°×¹â
+// 			System.Dsp.photo.Flag = 	G_SENCE_L_W	  ;
+//			ArguPriorExposure()   ;
+//
+///////////////////////////////////////////////////////////////×óºìÍâ
+// 			System.Dsp.photo.Flag = 	G_SENCE_L_IR	  ;
+//			ArguPriorExposure()   ;
+///////////////////////////////////////////////////////////////940
+//			System.Dsp.photo.Flag = 	G_SENCE_T_IR940	  ;
+//			ArguPriorExposure()   ;
+/////////////////////////////////////////////////////////////////Í¸850
+//			System.Dsp.photo.Flag = 	G_SENCE_B_IR	  ;
+//			ArguPriorExposure()   ;
+///////////////////////////////////////////////////////////////UV
+//			System.Dsp.photo.Flag = 	G_SENCE_DB_UV	  ;
+//			ArguPriorExposure()   ;
+//			OSTimeDly(200); 
 
-			CheckMode(); 
+//			CheckMode(); 
 
 	}
 

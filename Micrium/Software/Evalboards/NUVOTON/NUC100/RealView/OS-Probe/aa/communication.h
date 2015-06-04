@@ -2,7 +2,7 @@
 #define COMMUNICATION_H
 
 #include "global.h"
-
+#include "fuc_ph.h"
 #ifdef __COMMUNICATION
 #define  COMMU_EXT 
 #else 
@@ -39,5 +39,8 @@ unsigned char  DSP_SENDBW(uint8_t CMD,uint8_t Foward, const uint8_t *DSP_DATA);
 unsigned char  SHOW_SCREEN_T_W(uint8_t comm, uint8_t time, const uint8_t *DSP_DATA);
 
 unsigned char  Select_Send_LONG(uint8_t Select_data) ;
+
+uint8_t SendMode(PH_MODE *p);
+uint8_t  SendSence(PH_SENCE *p);
 #endif
 

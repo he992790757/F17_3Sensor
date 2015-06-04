@@ -57,7 +57,7 @@ const uint8_t  ProductDate1[12] =__DATE__;
 
 #elif defined AD_16_C608_1000PICS
 
-const uint8_t  SysVersion1[12] ="V1.17.005"; 
+const uint8_t  SysVersion1[12] ="V1.17.010"; 
 const uint8_t  HrdVersion1[12] ="V1.17.001";
 const uint8_t  MachineType1[12]="AD-16";
 const uint8_t  CdKey1[12]	   ="FFFFFFFF" ;

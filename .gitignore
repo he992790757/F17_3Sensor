@@ -17,6 +17,18 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+*.WK3
+*.bak
+obj/
+lst/
+Sample/
+Example/
+*.pdf
+*.htm
+USB/
+*.dep
+#*.bin
 # =========================
 # Operating System Files
 # =========================
@@ -41,3 +53,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+Micrium/Software/Evalboards/NUVOTON/NUC100/RealView/OS-Probe/output/F16_V1_14_056_Test.bin
